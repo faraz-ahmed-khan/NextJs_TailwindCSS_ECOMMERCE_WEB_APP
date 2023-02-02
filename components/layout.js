@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { Store } from '@/utilites/Store';
 const layout = ({ title, children }) => {
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+  console.log(cart);
   return (
     <>
       <Head>
@@ -17,7 +21,14 @@ const layout = ({ title, children }) => {
             </Link>
             <div className="flex justify-between">
               <Link href={'/cart'}>
-                <p className="px-4">Cart</p>
+                <p className="px-2">
+                  Cart
+                  {cart.cartItem.length > 0 && (
+                    <span className="ml-1  rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
+                      {cart.cartItem.reduce((a, c) => a + c.quantity, 0)}
+                    </span>
+                  )}
+                </p>
               </Link>
               <Link href={'/login'}>
                 <p>Login</p>
