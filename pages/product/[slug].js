@@ -8,6 +8,7 @@ import React, { useContext } from 'react';
 
 const ProductScreen = () => {
   const { state, dispatch } = useContext(Store);
+
   const router = useRouter();
   const { slug } = router.query;
   const product = data.products.find((x) => x.slug === slug);
@@ -24,11 +25,14 @@ const ProductScreen = () => {
       return;
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+    router.push('/cart');
   };
   return (
     <Layout title={product.name}>
       <div className="py-2">
-        <Link href={'/'}>back to products</Link>
+        <Link href={'/'}>
+          <p> back to product page</p>
+        </Link>
       </div>
       <div className="grid md:grid-cols-4 md:gap-3">
         <div className="md:col-span-2">
