@@ -2,14 +2,15 @@ import CheckOutWizard from '@/components/CheckOutWizard';
 import Layout from '@/components/layout';
 import { Store } from '@/utilites/Store';
 import Cookies from 'js-cookie';
+import { Router, useRouter } from 'next/router';
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import cart from './cart';
 
 const ShippingScreen = () => {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
-  const { shippingAddress } = state;
+  const { shippingAddress } = cart;
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -24,6 +25,7 @@ const ShippingScreen = () => {
     setValue('postalCode', shippingAddress?.postalCode);
     setValue('city', shippingAddress?.city);
     setValue('address', shippingAddress?.address);
+    console.log(shippingAddress, 'shippingAddress');
   }, [setValue, shippingAddress]);
 
   const submithandler = ({ fullName, address, city, postalCode, country }) => {
@@ -31,6 +33,7 @@ const ShippingScreen = () => {
       type: 'SAVE_SHIPPING_ADDRESS',
       payload: { fullName, address, city, postalCode, country },
     });
+    console.log(fullName, address, city, postalCode, country);
     Cookies.set(
       'cart',
       JSON.stringify({
@@ -44,10 +47,11 @@ const ShippingScreen = () => {
         },
       })
     );
+    router.push('/payment');
   };
   return (
     <Layout title="Shipping Address">
-      <CheckOutWizard activeStep={0} />
+      <CheckOutWizard activeStep={1} />
       <form
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submithandler)}
@@ -117,7 +121,7 @@ const ShippingScreen = () => {
             className="w-full"
             id="country"
             autoFocus
-            {...register('Country', {
+            {...register('country', {
               required: 'Please enter country',
             })}
           />
