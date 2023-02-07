@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import CheckoutWizard from '../components/CheckoutWizard';
-import Layout from '../components/Layout';
+import CheckOutWizard from '@/components/CheckOutWizard';
+import Layout from '@/components/layout';
 import { getError } from '@/utilites/error';
 import { Store } from '@/utilites/Store';
 
@@ -64,7 +64,7 @@ export default function PlaceOrderScreen() {
 
   return (
     <Layout title="Place Order">
-      <CheckoutWizard activeStep={3} />
+      <CheckOutWizard activeStep={3} />
       <h1 className="mb-4 text-xl">Place Order</h1>
       {cartItem.length === 0 ? (
         <div>
