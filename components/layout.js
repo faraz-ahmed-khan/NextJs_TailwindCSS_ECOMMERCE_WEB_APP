@@ -9,7 +9,7 @@ import { signOut, useSession } from 'next-auth/react';
 import DropdownLink from './DropdownLink';
 import Cookies from 'js-cookie';
 
-const layout = ({ title, children }) => {
+const Layout = ({ title, children }) => {
   const { status, data: session } = useSession();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
@@ -97,4 +97,4 @@ const layout = ({ title, children }) => {
   );
 };
 
-export default layout;
+export default Layout;

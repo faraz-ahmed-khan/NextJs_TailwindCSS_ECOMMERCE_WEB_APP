@@ -1,7 +1,6 @@
-import {
-  PayPalButtons,
-  // usePayPalScriptReducer
-} from '@paypal/react-paypal-js';
+// import // PayPalButtons,
+// // usePayPalScriptReducer
+// '@paypal/react-paypal-js';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -93,24 +92,10 @@ function OrderScreen() {
       if (successDeliver) {
         dispatch({ type: 'DELIVER_RESET' });
       }
-    } else {
-      const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get('/api/keys/paypal');
-        paypalDispatch({
-          type: 'resetOptions',
-          value: {
-            'client-id': clientId,
-            currency: 'USD',
-          },
-        });
-        paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
-      };
-      loadPaypalScript();
     }
   }, [
     order,
     orderId,
-    ,
     // paypalDispatch
     successDeliver,
     successPay,
@@ -129,39 +114,39 @@ function OrderScreen() {
     deliveredAt,
   } = order;
 
-  function createOrder(data, actions) {
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            amount: { value: totalPrice },
-          },
-        ],
-      })
-      .then((orderID) => {
-        return orderID;
-      });
-  }
+  // function createOrder(data, actions) {
+  //   return actions.order
+  //     .create({
+  //       purchase_units: [
+  //         {
+  //           amount: { value: totalPrice },
+  //         },
+  //       ],
+  //     })
+  //     .then((orderID) => {
+  //       return orderID;
+  //     });
+  // }
 
-  function onApprove(data, actions) {
-    return actions.order.capture().then(async function (details) {
-      try {
-        dispatch({ type: 'PAY_REQUEST' });
-        const { data } = await axios.put(
-          `/api/orders/${order._id}/pay`,
-          details
-        );
-        dispatch({ type: 'PAY_SUCCESS', payload: data });
-        toast.success('Order is paid successgully');
-      } catch (err) {
-        dispatch({ type: 'PAY_FAIL', payload: getError(err) });
-        toast.error(getError(err));
-      }
-    });
-  }
-  function onError(err) {
-    toast.error(getError(err));
-  }
+  // function onApprove(data, actions) {
+  //   return actions.order.capture().then(async function (details) {
+  //     try {
+  //       dispatch({ type: 'PAY_REQUEST' });
+  //       const { data } = await axios.put(
+  //         `/api/orders/${order._id}/pay`,
+  //         details
+  //       );
+  //       dispatch({ type: 'PAY_SUCCESS', payload: data });
+  //       toast.success('Order is paid successgully');
+  //     } catch (err) {
+  //       dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+  //       toast.error(getError(err));
+  //     }
+  //   });
+  // }
+  // function onError(err) {
+  //   toast.error(getError(err));
+  // }
 
   async function deliverOrderHandler() {
     try {

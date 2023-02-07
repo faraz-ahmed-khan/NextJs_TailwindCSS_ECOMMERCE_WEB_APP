@@ -1,6 +1,6 @@
 import Layout from '@/components/layout';
 import Product from '@/models/Product';
-import data from '@/utilites/data';
+// import data from '@/utilites/data';
 import db from '@/utilites/db';
 import { Store } from '@/utilites/Store';
 import axios from 'axios';

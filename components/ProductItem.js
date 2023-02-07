@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -6,7 +7,7 @@ const ProductItem = ({ product, addToCardHandler }) => {
     <div className="card">
       <Link href={`/product/${product.slug}`}>
         <p>
-          <img
+          <Image
             src={product.image}
             alt={product.name}
             className="rounded shadow"

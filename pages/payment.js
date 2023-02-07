@@ -37,7 +37,7 @@ export default function PaymentScreen() {
       return router.push('/shipping');
     }
     setSelectedPaymentMethod(paymentMethod || '');
-  }, [paymentMethod, router, shippingAddress.address]);
+  }, [paymentMethod, router, shippingAddress]);
 
   return (
     <Layout title="Payment Method">

@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 const CartScreen = () => {
   const { state, dispatch } = useContext(Store);
@@ -53,7 +54,7 @@ const CartScreen = () => {
                     <td>
                       <Link href={`/product/${item.slug}`}>
                         <p className="flex items-center">
-                          <img
+                          <Image
                             src={item.image}
                             alt={item.name}
                             width={50}
